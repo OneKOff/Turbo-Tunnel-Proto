@@ -27,7 +27,9 @@ public class WorldGenerator : MonoBehaviour
 
     public void Next() {
 
-        _tubePartsPool.Dequeue();
+        GameObject _deletedObject = _tubePartsPool.Dequeue();
+        
+        
         _tubePartsPool.Enqueue(GetRandomPart());
     }
 
