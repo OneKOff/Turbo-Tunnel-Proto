@@ -7,10 +7,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5453628087661174934, guid: 251eb40f9108a5141affc7b5b5782f9e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6a2849e010932a94e82b9b3072ad7c58, type: 2}
     - target: {fileID: 6660463725180667045, guid: 251eb40f9108a5141affc7b5b5782f9e,
         type: 3}
       propertyPath: m_Name
-      value: TunnelPartPurple
+      value: TunnelPartGray
       objectReference: {fileID: 0}
     - target: {fileID: 6660463725180667050, guid: 251eb40f9108a5141affc7b5b5782f9e,
         type: 3}
@@ -20,17 +25,17 @@ PrefabInstance:
     - target: {fileID: 6660463725180667050, guid: 251eb40f9108a5141affc7b5b5782f9e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 334.6
       objectReference: {fileID: 0}
     - target: {fileID: 6660463725180667050, guid: 251eb40f9108a5141affc7b5b5782f9e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -5.1
       objectReference: {fileID: 0}
     - target: {fileID: 6660463725180667050, guid: 251eb40f9108a5141affc7b5b5782f9e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -201.54588
       objectReference: {fileID: 0}
     - target: {fileID: 6660463725180667050, guid: 251eb40f9108a5141affc7b5b5782f9e,
         type: 3}

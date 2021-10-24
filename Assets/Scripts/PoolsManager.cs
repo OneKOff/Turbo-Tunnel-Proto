@@ -9,7 +9,7 @@ static class PoolsManager
 	[Serializable]
 	public struct PoolPart
 	{
-		public string prefabName;
+		public int prefabId;
 		public PooledObject prefab;
 		public int count;
 		public ObjectPool pool;
@@ -30,19 +30,19 @@ static class PoolsManager
 	}
 
 
-	public static GameObject GetObject(string name, Vector3 position, Quaternion rotation)
+	public static PooledObject GetObject(int id, Vector3 position, Quaternion rotation)
 	{
-		GameObject result = null;
+		PooledObject result = null;
 		if (_pools != null)
 		{
 			for (int i = 0; i < _pools.Length; i++)
 			{
-				if (string.Compare(_pools[i].prefabName, name) == 0)
+				if (_pools[i].prefabId == id)
 				{
-					result = _pools[i].pool.GetObject().gameObject;
+					result = _pools[i].pool.GetObject();
 					result.transform.position = position;
 					result.transform.rotation = rotation;
-					result.SetActive(true);
+					result.gameObject.SetActive(true);
 					return result;
 				}
 			}
