@@ -5,23 +5,33 @@ using UnityEngine;
 public class WorldGenerator : MonoBehaviour
 {
 
-    //[SerializeField] private Vector3 _startSpawnPosition = default;
-    //[SerializeField] private Vector3 _spawnAddend = new Vector3(0.0f, 0.0f, 30.0f);
+
     
+    [SerializeField] private Transform _startSpawnPosition = null;
+    [SerializeField] private Vector3 _spawnAddend = new Vector3(0.0f, 0.0f, 30.0f);
     [SerializeField] private int _pooledPartsCount = 6;
 
     [SerializeField] private List<int> _tubePartsPrefsId = null;
     private Queue<PooledObject> _tubePartsPool = null;
+    private Spawn _spawner = null;
 
-    //[SerializeField] Vector3 currentPosition
-    [SerializeField] private Spawn _spawner = default;
-
-    [Serializable]
     public class Spawn {
+        
+        public Vector3 Addend { get; set; } = default;
+        public Vector3 CurrentPosition { get; set; } = default;
 
-        public Vector3 _startSpawnPosition = default;
-        public Vector3 _spawnAddend = new Vector3(0.0f, 0.0f, 30.0f);
-        public Vector3 _currentPosition = default; 
+        public Spawn(Vector3 startPosition, Vector3 addend) {
+
+            CurrentPosition = startPosition;
+            Addend = addend;        
+        }
+
+        public void Next() {
+
+            CurrentPosition += Addend;        
+        }
+
+
     }
 
 
@@ -34,12 +44,13 @@ public class WorldGenerator : MonoBehaviour
 
     private void Awake()
     {
-        Vector3 currentPosition = _spawner._startSpawnPosition;
+        _spawner = new Spawn(_startSpawnPosition.position, _spawnAddend);        
+        _tubePartsPool = new Queue<PooledObject>(_pooledPartsCount);
 
         for (int i = 0; i < _pooledPartsCount; i++) {
 
-            _tubePartsPool.Enqueue(SpawnTubePart(currentPosition, Quaternion.identity));
-            currentPosition += _spawner._spawnAddend;
+            _tubePartsPool.Enqueue(SpawnTubePart(_spawner.CurrentPosition, Quaternion.identity));
+            _spawner.Next();
         }
     }
 
@@ -49,7 +60,7 @@ public class WorldGenerator : MonoBehaviour
         PooledObject _deletedObject = _tubePartsPool.Dequeue();
         _deletedObject.ReturnToPool();
         
-        _tubePartsPool.Enqueue(SpawnTubePart(_spawner._currentPosition, Quaternion.identity));
+        _tubePartsPool.Enqueue(SpawnTubePart(_spawner.CurrentPosition, Quaternion.identity));
     }
 
     private void OnDestroy()

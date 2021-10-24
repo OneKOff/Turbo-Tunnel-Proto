@@ -1279,8 +1279,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ebab39a4d668e4da1361fa676a33f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawner:
+    _startSpawnPosition: {x: 0, y: 0, z: 0}
+    _spawnAddend: {x: 0, y: 0, z: 0}
+    _currentPosition: {x: 0, y: 0, z: 0}
   _pooledPartsCount: 6
-  _tubePartsPrefs: []
+  _tubePartsPrefsId: 00000000010000000200000003000000
 --- !u!4 &1292269647
 Transform:
   m_ObjectHideFlags: 0
