@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class WorldGenerator : MonoBehaviour
 {
-
-
-    
     [SerializeField] private Transform _startSpawnPosition = null;
     //[SerializeField] private Vector3 _spawnAddend = new Vector3(0.0f, 0.0f, 30.0f);
     [SerializeField] private int _pooledPartsCount = 6;
@@ -32,7 +29,6 @@ public class WorldGenerator : MonoBehaviour
 
             CurrentPosition += Addend;        
         }
-
 
     }
 
@@ -80,20 +76,6 @@ public class WorldGenerator : MonoBehaviour
     }
 
     private void OnDestroy()
-    {
-        
-    }
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
     {
         
     }
