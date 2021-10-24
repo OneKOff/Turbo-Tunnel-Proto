@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b707e3476d5763d418166e6d913a15f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: 100
+  _size: 125
 --- !u!1 &363603956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1324,7 +1324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startSpawnPosition: {fileID: 590556977}
-  _pooledPartsCount: 6
+  _pooledPartsCount: 10
   _tubePartsPrefsId: 00000000010000000200000003000000
   _tubePartMesh: {fileID: 1584097118}
 --- !u!4 &1292269647
