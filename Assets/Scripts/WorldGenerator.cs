@@ -8,12 +8,14 @@ public class WorldGenerator : MonoBehaviour
 
     
     [SerializeField] private Transform _startSpawnPosition = null;
-    [SerializeField] private Vector3 _spawnAddend = new Vector3(0.0f, 0.0f, 30.0f);
+    //[SerializeField] private Vector3 _spawnAddend = new Vector3(0.0f, 0.0f, 30.0f);
     [SerializeField] private int _pooledPartsCount = 6;
 
     [SerializeField] private List<int> _tubePartsPrefsId = null;
+    [SerializeField] private MeshRenderer _tubePartMesh = null;
+    
     private Queue<PooledObject> _tubePartsPool = null;
-    private Spawn _spawner = null;
+    public Spawn Spawner { get; private set; } = null;
 
     public class Spawn {
         
@@ -35,6 +37,11 @@ public class WorldGenerator : MonoBehaviour
     }
 
 
+    public Vector3 GetMeshLength(MeshRenderer mesh) { 
+    
+        return new Vector3(0.0f, 0.0f, mesh.bounds.size.z);
+    }
+
     private PooledObject SpawnTubePart(Vector3 position, Quaternion rotation) {
 
         int randomId = _tubePartsPrefsId[UnityEngine.Random.Range(0, _tubePartsPrefsId.Count)];
@@ -44,13 +51,19 @@ public class WorldGenerator : MonoBehaviour
 
     private void Awake()
     {
-        _spawner = new Spawn(_startSpawnPosition.position, _spawnAddend);        
+        Spawner = new Spawn(_startSpawnPosition.position, GetMeshLength(_tubePartMesh));
+
+        Debug.Log("Start Spawn addend: " + Spawner.Addend);
+
         _tubePartsPool = new Queue<PooledObject>(_pooledPartsCount);
 
         for (int i = 0; i < _pooledPartsCount; i++) {
 
-            _tubePartsPool.Enqueue(SpawnTubePart(_spawner.CurrentPosition, Quaternion.identity));
-            _spawner.Next();
+            _tubePartsPool.Enqueue(SpawnTubePart(Spawner.CurrentPosition, Quaternion.identity));
+            Spawner.Next();
+
+            Debug.Log("Spawn addend: " + Spawner.Addend);
+
         }
     }
 
@@ -60,7 +73,10 @@ public class WorldGenerator : MonoBehaviour
         PooledObject _deletedObject = _tubePartsPool.Dequeue();
         _deletedObject.ReturnToPool();
         
-        _tubePartsPool.Enqueue(SpawnTubePart(_spawner.CurrentPosition, Quaternion.identity));
+        _tubePartsPool.Enqueue(SpawnTubePart(Spawner.CurrentPosition, Quaternion.identity));
+        Spawner.Next();
+
+        Debug.Log("Spawn addend: " + Spawner.Addend);
     }
 
     private void OnDestroy()
