@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance;
 
-    [SerializeField] private PlayerCollision playerCollision;
+    [SerializeField] private Player playerCollision;
     [SerializeField] private float minSpeed = 1.0f, maxSpeed = 25.0f, accel = 10.0f, maxRotationSpeed = 20.0f, maxRotationAngle = 25.0f;
 
     private float _forwardSpeed = 0.0f, _currentRotationSpeed = 0.0f;
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0f, 0f, _currentRotationSpeed * Time.deltaTime);
         playerCollision.transform.localEulerAngles = Vector3.right * currentAngle.x + Vector3.up * currentAngle.y + 
             Vector3.forward * maxRotationAngle * _currentRotationSpeed / maxRotationSpeed;
-        //playerCollision.transform.localEulerAngles += new Vector3(0, 0, maxRotationAngle * Mathf.Deg2Rad * _currentRotationSpeed / maxRotationSpeed);
+
     }
 
     private void SetMinSpeed()

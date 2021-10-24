@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 
-public class PlayerCollision : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public Action OnObstacleHit;
 
