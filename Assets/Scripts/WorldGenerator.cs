@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class WorldGenerator : MonoBehaviour
 {
+
+
+    
     [SerializeField] private Transform _startSpawnPosition = null;
     //[SerializeField] private Vector3 _spawnAddend = new Vector3(0.0f, 0.0f, 30.0f);
     [SerializeField] private int _pooledPartsCount = 6;
 
     [SerializeField] private List<int> _tubePartsPrefsId = null;
     [SerializeField] private MeshRenderer _tubePartMesh = null;
-    
+
+
     private Queue<PooledObject> _tubePartsPool = null;
     public Spawn Spawner { get; private set; } = null;
 
@@ -30,12 +34,13 @@ public class WorldGenerator : MonoBehaviour
             CurrentPosition += Addend;        
         }
 
+
     }
 
 
-    public Vector3 GetMeshLength(MeshRenderer mesh) { 
+    public float GetMeshLength() { 
     
-        return new Vector3(0.0f, 0.0f, mesh.bounds.size.z);
+        return _tubePartMesh.bounds.size.z;
     }
 
     private PooledObject SpawnTubePart(Vector3 position, Quaternion rotation) {
@@ -47,9 +52,9 @@ public class WorldGenerator : MonoBehaviour
 
     private void Awake()
     {
-        Spawner = new Spawn(_startSpawnPosition.position, GetMeshLength(_tubePartMesh));
+        Spawner = new Spawn(_startSpawnPosition.position, new Vector3(0.0f, 0.0f, GetMeshLength()));
 
-        Debug.Log("Start Spawn addend: " + Spawner.Addend);
+        //Debug.Log("Start Spawn addend: " + Spawner.Addend);
 
         _tubePartsPool = new Queue<PooledObject>(_pooledPartsCount);
 
@@ -58,7 +63,7 @@ public class WorldGenerator : MonoBehaviour
             _tubePartsPool.Enqueue(SpawnTubePart(Spawner.CurrentPosition, Quaternion.identity));
             Spawner.Next();
 
-            Debug.Log("Spawn addend: " + Spawner.Addend);
+            //Debug.Log("Spawn addend: " + Spawner.Addend);
 
         }
     }
@@ -72,10 +77,24 @@ public class WorldGenerator : MonoBehaviour
         _tubePartsPool.Enqueue(SpawnTubePart(Spawner.CurrentPosition, Quaternion.identity));
         Spawner.Next();
 
-        Debug.Log("Spawn addend: " + Spawner.Addend);
+        //Debug.Log("Spawn addend: " + Spawner.Addend);
     }
 
     private void OnDestroy()
+    {
+        
+    }
+
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         
     }
