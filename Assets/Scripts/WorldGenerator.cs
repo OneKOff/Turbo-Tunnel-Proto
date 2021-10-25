@@ -64,7 +64,7 @@ public class WorldGenerator : MonoBehaviour
             Spawner.Next();
 
             //Debug.Log("Spawn addend: " + Spawner.Addend);
-
+            
         }
     }
 
