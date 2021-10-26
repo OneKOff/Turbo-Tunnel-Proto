@@ -8,12 +8,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private WorldGenerator _worldGenerator = null;
 
 
-
     private void Awake()
     {
         _mileageStage.Size = _worldGenerator.GetMeshLength();
     }
-
 
     private void OnEnable()
     {
@@ -24,6 +22,4 @@ public class GameManager : MonoBehaviour
     {
         _mileageStage.OnNextStage -= () => _worldGenerator.Next();
     }
-
-
 }

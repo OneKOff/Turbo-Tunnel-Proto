@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
     private void Acceleration()
     {
         if (_forwardSpeed < maxSpeed)
@@ -60,13 +59,10 @@ public class PlayerController : MonoBehaviour
         Vector3 currentAngle = playerCollision.transform.localEulerAngles;
 
         transform.Translate(0f, 0f, _forwardSpeed * Time.deltaTime);
-
         //Debug.Log("Speed: " + _forwardSpeed);
-
         transform.Rotate(0f, 0f, _currentRotationSpeed * Time.deltaTime);
         playerCollision.transform.localEulerAngles = Vector3.right * currentAngle.x + Vector3.up * currentAngle.y + 
-            Vector3.forward * maxRotationAngle * _currentRotationSpeed / maxRotationSpeed;
-
+            -Vector3.forward * maxRotationAngle * _currentRotationSpeed / maxRotationSpeed;
     }
 
     private void SetMinSpeed()
